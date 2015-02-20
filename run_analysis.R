@@ -27,7 +27,6 @@ data_set <- rbind(test_set, training_set)
 # extracting only the mean and standard deviation for each measurement
 # this is done by filtering from the feature names all variables where
 # 'std' or 'mean' is included
-library(dplyr)
 selec_feature <- filter(feature_names, grepl('mean', V2) | grepl('std', V2))
 
 # this data.frame is then converted to a factor of all variable numbers
@@ -85,7 +84,6 @@ names(data_selec) <- gsub("std-Z", "Z-std", names(data_selec))
 # this is done with the dpply function to summarize columnwise based on the
 # grouping of 'activity' and 'subject'
 data <- ddply(data_selec, .(activity, subject), numcolwise(mean))
-detach(package:plyr) 
 
 # save the datasest in the required format with the row.name = FALSE command as requested
 tidydataset <- write.table (data, file = "tidydataset.txt", row.name = FALSE)
